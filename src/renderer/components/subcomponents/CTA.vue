@@ -78,7 +78,7 @@ export default {
         var stop = this.stops[i]
         stop.flash = null
         var stpid = stop.stpid
-        var p = this.$http.get(`https://${this.$config.cta.proxyUrl}?key=${this.$config.cta.APIKey}&stpid=${stpid}&outputType=JSON`)
+        var p = this.$http.get(`${this.$config.cta.proxyUrl}?key=${this.$config.cta.APIKey}&stpid=${stpid}&outputType=JSON`)
         pl.push(p)
       }
       Promise.all(pl).then((data) => {
