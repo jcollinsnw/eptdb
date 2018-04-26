@@ -1,0 +1,440 @@
+{
+  "200": {
+    "label": "thunderstorm with light rain",
+    "icon": "storm-showers",
+    "color": "cyan"
+  },
+
+  "201": {
+    "label": "thunderstorm with rain",
+    "icon": "storm-showers",
+    "color": "cyan"
+  },
+
+  "202": {
+    "label": "thunderstorm with heavy rain",
+    "icon": "storm-showers",
+    "color": "cyan"
+  },
+
+  "210": {
+    "label": "light thunderstorm",
+    "icon": "storm-showers",
+    "color": "cyan"
+  },
+
+  "211": {
+    "label": "thunderstorm",
+    "icon": "thunderstorm",
+    "color": "cyan"
+  },
+
+  "212": {
+    "label": "heavy thunderstorm",
+    "icon": "thunderstorm",
+    "color": "cyan"
+  },
+
+  "221": {
+    "label": "ragged thunderstorm",
+    "icon": "thunderstorm",
+    "color": "cyan"
+  },
+
+  "230": {
+    "label": "thunderstorm with light drizzle",
+    "icon": "storm-showers",
+    "color": "cyan"
+  },
+
+  "231": {
+    "label": "thunderstorm with drizzle",
+    "icon": "storm-showers",
+    "color": "cyan"
+  },
+
+  "232": {
+    "label": "thunderstorm with heavy drizzle",
+    "icon": "storm-showers",
+    "color": "cyan"
+  },
+
+  "300": {
+    "label": "light intensity drizzle",
+    "icon": "sprinkle",
+    "color": "cyan"
+  },
+
+  "301": {
+    "label": "drizzle",
+    "icon": "sprinkle",
+    "color": "cyan"
+  },
+
+  "302": {
+    "label": "heavy intensity drizzle",
+    "icon": "sprinkle",
+    "color": "cyan"
+  },
+
+  "310": {
+    "label": "light intensity drizzle rain",
+    "icon": "sprinkle",
+    "color": "cyan"
+  },
+
+  "311": {
+    "label": "drizzle rain",
+    "icon": "sprinkle",
+    "color": "cyan"
+  },
+
+  "312": {
+    "label": "heavy intensity drizzle rain",
+    "icon": "sprinkle",
+    "color": "cyan"
+  },
+
+  "313": {
+    "label": "shower rain and drizzle",
+    "icon": "sprinkle",
+    "color": "cyan"
+  },
+
+  "314": {
+    "label": "heavy shower rain and drizzle",
+    "icon": "sprinkle",
+    "color": "cyan"
+  },
+
+  "321": {
+    "label": "shower drizzle",
+    "icon": "sprinkle",
+    "color": "cyan"
+  },
+
+  "500": {
+    "label": "light rain",
+    "icon": "rain",
+    "color": "cyan"
+  },
+
+  "501": {
+    "label": "moderate rain",
+    "icon": "rain",
+    "color": "cyan"
+  },
+
+  "502": {
+    "label": "heavy intensity rain",
+    "icon": "rain",
+    "color": "cyan"
+  },
+
+  "503": {
+    "label": "very heavy rain",
+    "icon": "rain",
+    "color": "cyan"
+  },
+
+  "504": {
+    "label": "extreme rain",
+    "icon": "rain",
+    "color": "cyan"
+  },
+
+  "511": {
+    "label": "freezing rain",
+    "icon": "rain-mix",
+    "color": "cyan"
+  },
+
+  "520": {
+    "label": "light intensity shower rain",
+    "icon": "showers",
+    "color": "cyan"
+  },
+
+  "521": {
+    "label": "shower rain",
+    "icon": "showers",
+    "color": "cyan"
+  },
+
+  "522": {
+    "label": "heavy intensity shower rain",
+    "icon": "showers",
+    "color": "cyan"
+  },
+
+  "531": {
+    "label": "ragged shower rain",
+    "icon": "showers",
+    "color": "cyan"
+  },
+
+  "600": {
+    "label": "light snow",
+    "icon": "snow",
+    "color": "white"
+  },
+
+  "601": {
+    "label": "snow",
+    "icon": "snow",
+    "color": "white"
+  },
+
+  "602": {
+    "label": "heavy snow",
+    "icon": "snow",
+    "color": "white"
+  },
+
+  "611": {
+    "label": "sleet",
+    "icon": "sleet",
+    "color": "cyan"
+  },
+
+  "612": {
+    "label": "shower sleet",
+    "icon": "sleet",
+    "color": "cyan"
+  },
+
+  "615": {
+    "label": "light rain and snow",
+    "icon": "rain-mix",
+    "color": "cyan"
+  },
+
+  "616": {
+    "label": "rain and snow",
+    "icon": "rain-mix",
+    "color": "cyan"
+  },
+
+  "620": {
+    "label": "light shower snow",
+    "icon": "rain-mix",
+    "color": "cyan"
+  },
+
+  "621": {
+    "label": "shower snow",
+    "icon": "rain-mix",
+    "color": "cyan"
+  },
+
+  "622": {
+    "label": "heavy shower snow",
+    "icon": "rain-mix",
+    "color": "cyan"
+  },
+
+  "701": {
+    "label": "mist",
+    "icon": "sprinkle",
+    "color": "cyan"
+  },
+
+  "711": {
+    "label": "smoke",
+    "icon": "smoke",
+    "color": "white"
+  },
+
+  "721": {
+    "label": "haze",
+    "icon": "day-haze",
+    "color": "white"
+  },
+
+  "731": {
+    "label": "sand, dust whirls",
+    "icon": "cloudy-gusts",
+    "color": "white"
+  },
+
+  "741": {
+    "label": "fog",
+    "icon": "fog",
+    "color": "white"
+  },
+
+  "751": {
+    "label": "sand",
+    "icon": "cloudy-gusts",
+    "color": "white"
+  },
+
+  "761": {
+    "label": "dust",
+    "icon": "dust",
+    "color": "white"
+  },
+
+  "762": {
+    "label": "volcanic ash",
+    "icon": "smog",
+    "color": "white"
+  },
+
+  "771": {
+    "label": "squalls",
+    "icon": "day-windy",
+    "color": "white"
+  },
+
+  "781": {
+    "label": "tornado",
+    "icon": "tornado",
+    "color": "white"
+  },
+
+  "800": {
+    "label": "clear sky",
+    "icon": "sunny",
+    "color": "yellow"
+  },
+
+  "801": {
+    "label": "few clouds",
+    "icon": "cloudy",
+    "color": "white"
+  },
+
+  "802": {
+    "label": "scattered clouds",
+    "icon": "cloudy",
+    "color": "white"
+  },
+
+  "803": {
+    "label": "broken clouds",
+    "icon": "cloudy",
+    "color": "white"
+  },
+
+  "804": {
+    "label": "overcast clouds",
+    "icon": "cloudy",
+    "color": "white"
+  },
+
+
+  "900": {
+    "label": "tornado",
+    "icon": "tornado",
+    "color": "white"
+  },
+
+  "901": {
+    "label": "tropical storm",
+    "icon": "hurricane",
+    "color": "cyan"
+  },
+
+  "902": {
+    "label": "hurricane",
+    "icon": "hurricane",
+    "color": "cyan"
+  },
+
+  "903": {
+    "label": "cold",
+    "icon": "snowflake-cold",
+    "color": "white"
+  },
+
+  "904": {
+    "label": "hot",
+    "icon": "hot",
+    "color": "red"
+  },
+
+  "905": {
+    "label": "windy",
+    "icon": "windy",
+    "color": "white"
+  },
+
+  "906": {
+    "label": "hail",
+    "icon": "hail",
+    "color": "cyan"
+  },
+
+  "951": {
+    "label": "calm",
+    "icon": "sunny",
+    "color": "yellow"
+  },
+
+  "952": {
+    "label": "light breeze",
+    "icon": "cloudy-gusts",
+    "color": "white"
+  },
+
+  "953": {
+    "label": "gentle breeze",
+    "icon": "cloudy-gusts",
+    "color": "white"
+  },
+
+  "954": {
+    "label": "moderate breeze",
+    "icon": "cloudy-gusts",
+    "color": "white"
+  },
+
+  "955": {
+    "label": "fresh breeze",
+    "icon": "cloudy-gusts",
+    "color": "white"
+  },
+
+  "956": {
+    "label": "strong breeze",
+    "icon": "cloudy-gusts",
+    "color": "white"
+  },
+
+  "957": {
+    "label": "high wind, near gale",
+    "icon": "cloudy-gusts",
+    "color": "white"
+  },
+
+  "958": {
+    "label": "gale",
+    "icon": "cloudy-gusts",
+    "color": "white"
+  },
+
+  "959": {
+    "label": "severe gale",
+    "icon": "cloudy-gusts",
+    "color": "white"
+  },
+
+  "960": {
+    "label": "storm",
+    "icon": "thunderstorm",
+    "color": "cyan"
+  },
+
+  "961": {
+    "label": "violent storm",
+    "icon": "thunderstorm",
+    "color": "cyan"
+  },
+
+  "962": {
+    "label": "hurricane",
+    "icon": "cloudy-gusts",
+    "color": "cyan"
+  }
+}
