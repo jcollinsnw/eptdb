@@ -44,7 +44,19 @@ export default {
     start: function () {
       this.heartbeat = setInterval(() => {
         this.now = Math.floor(Date.now() / 1000)
-        EventBus.$emit('heartbeat', this.now)
+        var today = new Date()
+        var h = today.getHours()
+        console.log(h)
+        var runSleep = false
+        var sleepd = false
+        if (this.$config.options.sleep && h >= this.$config.options.sleepHours[0] && h <= this.$config.options.sleepHours[1]) {
+          var sleep = this.now % (this.$config.options.sleepMinutes * 60) === 0
+          if (sleep) {
+            runSleep = true
+          }
+          sleepd = true
+        }
+        EventBus.$emit('heartbeat', {time: this.now, runSleep: runSleep, sleep: sleepd})
       }, 1000)
     }
   },

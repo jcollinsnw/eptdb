@@ -1,17 +1,22 @@
 <template>
   <v-expansion-panel popout expandable class="cta">
-      <v-expansion-panel-content>
+      <v-expansion-panel-content :value="true">
         <div slot="header">
           <img src="~@/assets/cta.svg" class="im">
           <div class="title">Trains</div>
         </div>
-        <v-card>
+        <v-card class="card">
           <v-progress-linear height="3" color="secondary" :value="updatePercent"></v-progress-linear>
           <v-container v-if="ready">
+            <v-layout row>
+              <v-flex class="next">Next 'L' Services</v-flex>
+            </v-layout>
             <v-layout row class="pc" v-for="stop in stops" :key="stop.name">
               <v-flex xs4 :class="[stop.class, stop.flash, 'c']">{{stop.name}}</v-flex>
+
               <v-flex xs4 :class="[stop.class, stop.flash, 'c', 'r']" v-if="arrivals[stop.name].etas[0] !== 0">{{arrivals[stop.name].etas[0]}}m <v-icon>wifi</v-icon></v-flex>
               <v-flex xs4 :class="[stop.class, stop.flash, 'c', 'r']" v-else>Due <v-icon>wifi</v-icon></v-flex>
+
               <v-flex xs4 :class="[stop.class, stop.flash, 'c', 'r']" v-if="arrivals[stop.name].etas[1] !== 0">{{arrivals[stop.name].etas[1]}}m <v-icon>access_time</v-icon></v-flex>
               <v-flex xs4 :class="[stop.class, stop.flash, 'c', 'r']" v-else>Due <v-icon>wifi</v-icon></v-flex>
             </v-layout>
@@ -58,21 +63,22 @@ export default {
   },
   mounted () {
     this.stops = this.$config.cta.stops
-    this.getCTAData()
+    this.getData({time: this.now, runSleep: false})
     EventBus.$on('heartbeat', now => {
-      this.now = now
-      this.updatePercent = 100 - (Math.max(this.now - this.updated, 0) / this.updateSeconds) * 100
-      if (this.now % this.updateSeconds === 0) {
-        console.log('Update CTA')
-        this.getCTAData()
+      this.now = now.time
+      if (now.sleep) {
+        this.updatePercent = 100 - (Math.max(this.now - this.updated, 0) / (this.$config.options.sleepMinutes * 60)) * 100
+      } else {
+        this.updatePercent = 100 - (Math.max(this.now - this.updated, 0) / this.updateSeconds) * 100
+      }
+      if (now.runSleep || (this.now % this.updateSeconds === 0 && !now.sleep)) {
+        this.getData(now)
       }
     })
   },
   methods: {
-    stop: function () {
-      clearInterval(this.interval)
-    },
-    getCTAData: function () {
+    getData: function (now) {
+      console.log('Update CTA', now)
       var pl = []
       for (var i in this.stops) {
         var stop = this.stops[i]
@@ -172,7 +178,10 @@ export default {
   color: #424242;
 }
 .pc {
-  border: 2px solid black;
+  border: 1px solid black;
+}
+.card {
+  padding-bottom: 21px;
 }
 .ico {
   padding-right: 3px;
@@ -191,5 +200,11 @@ export default {
 }
 .cta .card {
   background-color: black !important;
+}
+.next {
+  background-color: #444;
+  border: 1px solid black;
+  padding-left: 10px;
+  font-weight: bold;
 }
 </style>

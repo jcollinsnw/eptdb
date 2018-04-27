@@ -1,6 +1,6 @@
 <template>
   <v-expansion-panel popout expandable class="cta">
-      <v-expansion-panel-content>
+      <v-expansion-panel-content :value="true">
         <div slot="header">
           <v-icon class="im">cloud</v-icon>
           <div class="title">Weather</div>
@@ -9,13 +9,24 @@
           <v-progress-linear height="3" color="secondary" :value="updatePercent"></v-progress-linear>
           <v-container>
             <v-layout row class="center">
-              <v-flex xs2><i :class="['wi', 'large', currentConditions.icon]" :style="{color: currentConditions.color}"></i></v-flex>
-              <v-flex xs5 class="forecast">{{currentConditions.condition}} {{currentConditions.temp}}°</v-flex>
-              <v-flex xs5 class="forecast"><span class="hi">{{currentConditions.high}}°</span>/<span class="lo">{{currentConditions.low}}°</span></v-flex>
+              <v-flex xs2 class="forecast"><div class="vc"><i :class="['wi', 'large', currentConditions.icon]" :style="{color: currentConditions.color}"></i></div></v-flex>
+              <v-flex xs7 class="forecast"><div class="vc">{{currentConditions.condition}}</div></v-flex>
+              <v-flex xs3 class="forecast">
+                  <v-layout row align-center>
+                    <v-flex class="forecast lg">
+                      {{currentConditions.temp}}°
+                    </v-flex>
+                  </v-layout>
+                  <v-layout row>
+                    <v-flex class="forecast sm">
+                      <span class="hi">{{currentConditions.high}}°</span>/<span class="lo">{{currentConditions.low}}°</span>
+                    </v-flex>
+                  </v-layout>
+              </v-flex>
             </v-layout>
-            <v-layout row style="padding-top: 11px;">
+            <v-layout row style="padding-top: 9px;">
               <v-flex xs3 class="center" v-for="(f, i) in forecast" :key="'f-' + i">
-                <v-layout row class="center"><v-flex xs12>{{f.dow}}</v-flex></v-layout>
+                <v-layout row class="center" align-center><v-flex xs12>{{f.dow}}</v-flex></v-layout>
                 <v-layout row class="center"><v-flex xs12><i :class="['wi', f.conditions.icon]" :style="{color: f.conditions.color}"></i></v-flex></v-layout>
                 <v-layout row class="center"><v-flex xs12>{{f.conditions.condition}}</v-flex></v-layout>
                 <v-layout row class="center"><v-flex xs12><span class="hi">{{f.high}}°</span>/<span class="lo">{{f.low}}°</span></v-flex></v-layout>
@@ -55,34 +66,44 @@ export default {
   },
   mounted () {
     this.apiKey = this.$config.weather.apiKey
-    this.getWeatherData()
+    this.getData({time: this.now, runSleep: false})
     EventBus.$on('heartbeat', now => {
-      this.now = now
-      this.updatePercent = 100 - (Math.max(this.now - this.updated, 0) / this.updateSeconds) * 100
-      if (this.now % this.updateSeconds === 0) {
-        console.log('Update Weather')
-        this.getWeatherData()
+      this.now = now.time
+      if (now.sleep) {
+        this.updatePercent = 100 - (Math.max(this.now - this.updated, 0) / (this.$config.options.sleepMinutes * 60)) * 100
+      } else {
+        this.updatePercent = 100 - (Math.max(this.now - this.updated, 0) / this.updateSeconds) * 100
+      }
+      if (now.runSleep || (this.now % this.updateSeconds === 0 && !now.sleep)) {
+        this.getData(now)
       }
     })
   },
   methods: {
-    getWeatherData: function () {
+    getData: function (now) {
+      console.log('Update Weather')
       this.$http.get(`https://api.openweathermap.org/data/2.5/weather?id=${this.$config.weather.cityId}&appid=${this.$config.weather.APIKey}&units=${this.$config.weather.units}`).then((result) => {
         this.currentConditions = {
           temp: Math.floor(result.data.main.temp),
           humidity: result.data.main.humidity,
           condition: this.caps(result.data.weather[0].description),
-          icon: 'wi-day-' + iconMap[result.data.weather[0].id].icon,
+          icon: 'wi-night-' + iconMap[result.data.weather[0].id].icon,
           color: iconMap[result.data.weather[0].id].color
         }
-      })
-      this.$http.get(`https://api.openweathermap.org/data/2.5/forecast?id=${this.$config.weather.cityId}&appid=${this.$config.weather.APIKey}&units=${this.$config.weather.units}`).then((result) => {
-        var fc = this.forecastCalc(result.data.list)
-        this.currentConditions.high = fc[0].high
-        this.currentConditions.low = fc[0].low
-        this.forecast = fc.slice(1, 5)
-        this.updated = this.now
-        this.ready = true
+        this.$http.get(`https://api.openweathermap.org/data/2.5/forecast?id=${this.$config.weather.cityId}&appid=${this.$config.weather.APIKey}&units=${this.$config.weather.units}`).then((result) => {
+          var fc = this.forecastCalc(result.data.list)
+          this.currentConditions.high = fc[0].high
+          this.currentConditions.low = fc[0].low
+          if (this.currentConditions.temp > this.currentConditions.high) {
+            this.currentConditions.high = this.currentConditions.temp
+          }
+          if (this.currentConditions.temp < this.currentConditions.low) {
+            this.currentConditions.low = this.currentConditions.temp
+          }
+          this.forecast = fc.slice(1, 5)
+          this.updated = this.now
+          this.ready = true
+        })
       })
     },
     forecastCalc: function (data) {
@@ -200,8 +221,24 @@ export default {
 .forecast {
   font-size: 25px;
 }
+.forecast.lg {
+  font-size: 30px;
+}
+.forecast.sm {
+  font-size: 20px;
+}
+.forecast > .vc {
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
 .cta .expansion-panel__container {
   background-color: black !important;
+}
+.np {
+  padding: 0px;
 }
 .cta .card {
   background-color: black !important;

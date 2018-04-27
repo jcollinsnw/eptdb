@@ -1,6 +1,6 @@
 <template>
   <v-expansion-panel popout expandable>
-      <v-expansion-panel-content>
+      <v-expansion-panel-content :value="true">
         <div slot="header"><img src="~@/assets/divvy.svg" class="im"></div>
         <v-card>
           <v-progress-linear height="3" color="primary" :value="updatePercent"></v-progress-linear>
@@ -54,21 +54,22 @@ export default {
     this.divvyLocations = this.$config.divvy.locations
     this.statusUrl = this.$config.divvy.statusUrl
     this.stationUrl = this.$config.divvy.stationUrl
-    this.getDivvyData()
+    this.getData({time: this.now, runSleep: false})
     EventBus.$on('heartbeat', now => {
-      this.now = now
-      this.updatePercent = 100 - (Math.max(this.now - this.updated, 0) / this.updateSeconds) * 100
-      if (this.now % this.updateSeconds === 0) {
-        console.log('Update Divvy')
-        this.getDivvyData()
+      this.now = now.time
+      if (now.sleep) {
+        this.updatePercent = 100 - (Math.max(this.now - this.updated, 0) / (this.$config.options.sleepMinutes * 60)) * 100
+      } else {
+        this.updatePercent = 100 - (Math.max(this.now - this.updated, 0) / this.updateSeconds) * 100
+      }
+      if (now.runSleep || (this.now % this.updateSeconds === 0 && !now.sleep)) {
+        this.getData(now)
       }
     })
   },
   methods: {
-    stop: function () {
-      clearInterval(this.interval)
-    },
-    getDivvyData: function () {
+    getData: function (now) {
+      console.log('Update Divvy')
       this.$http.get(this.statusUrl).then((response) => {
         for (var i in this.divvyLocations) {
           var locationData = this.$jq(['locations[address=?]', this.divvyLocations[i].name], {locations: response.data}).value

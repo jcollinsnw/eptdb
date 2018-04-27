@@ -150,6 +150,9 @@
 .wi-night-clear:before {
   content: "\f02e";
 }
+.wi-night-sunny:before {
+  content: "\f02e";
+}
 .wi-night-alt-cloudy:before {
   content: "\f086";
 }

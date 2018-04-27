@@ -27,4 +27,7 @@
   font-size: 36px;
   padding: 0px;
 }
+.progress-linear {
+  margin: 0px;
+}
 </style>
