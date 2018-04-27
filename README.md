@@ -2,7 +2,7 @@
 
 > An electron-vue project to show Divvy Bike and CTA Train schedules along with weather. This will also work in Chicago.
 
-![](https://i.imgur.com/IYzUGFS.png)
+![](https://i.imgur.com/RoQb8ZK.png)
 
 #### Configure EPTDB
 
